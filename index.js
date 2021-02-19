@@ -1,4 +1,4 @@
-require("./config/config");
+require("./config");
 require("./models/User");
 require("./services/passport");
 
