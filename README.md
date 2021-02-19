@@ -17,3 +17,5 @@
 - Check out swagger for documenting API
 
 - Implement CI (circleCI, Jenkins)
+
+- Implement routes auto require
