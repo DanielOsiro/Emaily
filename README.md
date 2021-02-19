@@ -15,3 +15,5 @@
 - Check why google oauth is logging in directly instead of displaying the option to login with a different account
 
 - Check out swagger for documenting API
+
+- Implement CI (circleCI, Jenkins)
