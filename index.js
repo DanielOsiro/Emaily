@@ -1,5 +1,6 @@
 require("./config");
 require("./models/User");
+require("./models/Survey");
 require("./services/passport");
 
 const cookieSession = require("cookie-session");
