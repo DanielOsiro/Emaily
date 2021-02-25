@@ -21,3 +21,5 @@
 - Implement routes auto require
 
 - Check out mocha for unit testing node side
+
+- Enable users to delete surveys
