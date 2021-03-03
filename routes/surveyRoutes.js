@@ -10,25 +10,34 @@ const surveyTemplate = require("../services/emailTemplates/surveyTemplate");
 const Survey = mongoose.model("surveys");
 
 module.exports = (app) => {
-  app.get("/api/surveys", requireLogin, async (req, res) => {
-    // TODO: implement pagination logic
+  app.get(
+    ["/api/surveys", "/api/surveys/:page"],
+    requireLogin,
+    async (req, res) => {
+      const limit = 5;
+      const { page, skip, totalPages } = await require("../services/paginate")(
+        "surveys",
+        req.params.page,
+        limit
+      );
 
-    const surveys = await Survey.find(
-      {
-        _user: req.user.id,
-      },
-      ["title", "body", "dateSent", "yes", "no"],
-      {
-        skip: 0,
-        limit: 10,
-        sort: {
-          dateSent: -1,
+      const surveys = await Survey.find(
+        {
+          _user: req.user.id,
         },
-      }
-    );
+        ["title", "body", "dateSent", "yes", "no"],
+        {
+          skip,
+          limit,
+          sort: {
+            dateSent: -1,
+          },
+        }
+      );
 
-    res.send(surveys);
-  });
+      res.send({ data: surveys, totalPages, page });
+    }
+  );
 
   app.get("/api/surveys/:surveyId/:choice", (req, res) => {
     res.send("Thanks for voting!");
