@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSurveys } from "../../actions";
 
 const SurveyList = (props) => {
-  let { page } = useParams();
-  const [currentPage, setCurrentPage] = useState(page ?? 1);
+  const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+  const q = useQuery();
+  const [currentPage, setCurrentPage] = useState(q.get("p") ?? 1);
 
   useEffect(() => {
     props.fetchSurveys(currentPage);
@@ -46,7 +49,7 @@ const SurveyList = (props) => {
         </p>
         <p>
           <Link
-            to={`/surveys/${previousPage.toString()}`}
+            to={`/surveys?p=${previousPage.toString()}`}
             onClick={() => setCurrentPage(previousPage)}
             className="teal btn-flat white-text"
           >
@@ -54,7 +57,7 @@ const SurveyList = (props) => {
           </Link>
 
           <Link
-            to={`/surveys/${nextPage.toString()}`}
+            to={`/surveys?p=${nextPage.toString()}`}
             onClick={() => setCurrentPage(nextPage)}
             className="teal btn-flat white-text"
           >
