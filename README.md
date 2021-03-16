@@ -1,6 +1,6 @@
 # Emaily
 
-Application to send survey based emails which can track users responses.
+Application to send survey based emails which can track users responses. Built following Stephen Grider's "Node with React: Fullstack Web Development" course with a few custom enhancements.
 
 ## How to run this app locally
 
